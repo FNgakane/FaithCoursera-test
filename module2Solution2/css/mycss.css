@@ -1,101 +1,39 @@
- body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-
-    header {
-      background-color: #333;
-      color: #fff;
-      padding: 20px;
-    }
-
-    h1 {
-      margin: 0;
-    }
-
-    main {
-      padding: 20px;
-      display: flex;
-      flex-wrap: wrap;
-    }
-
-    .food-section {
-      flex-basis: 33.33%;
-      box-sizing: border-box;
-      margin: 5px;
-      padding: 4px;
-      border: 1px solid;
-    }
-
-    .food-section:nth-child(1) {
-      background-color: red;
-    }
-
-    .food-section:nth-child(2) {
-      background-color: yellow;
-    }
-
-    .food-section:nth-child(3) {
-      background-color: green;
-    }
-
-    .section-title {
-      top: 20px;
-      right: 0;
-      color: #fff;
-      padding: 10px;
-      font-weight: bold;
-      text-align: right;
-    }
-.section-title > .highlight1 {
-  background-color: plum;
-  color: black;
-  border: 2px solid;
-  font-size: 25px;
+.navbar.navbar-scroll {
+  position: relative;
 }
 
-.section-title > .highlight2 {
-  background-color: green;
-  color: black;
-  border: 2px solid;
-  font-size: 25px;
+.navbar.navbar-scroll.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
-.section-title > .highlight3 {
-  background-color: yellow;
-  color: black;
-  border: 2px solid;
-  font-size: 25px;
+.navbar.navbar-scroll.fixed .navbar-collapse {
+  background-color: #f8f8f8;
 }
 
-
-/* Desktop View */
-@media (min-width: 992px) {
-  .food-section {
-    flex-basis: 30.36%;
-  }
+.navbar.navbar-scroll .navbar-toggle {
+  border: none;
+  background-color: transparent;
 }
 
-/* Tablet View */
-@media only screen and (max-width: 991px) {
-  .food-section {
-    flex-basis: 49%;
-  }
-  
-  .food-section:nth-child(3) {
-    flex-basis: 100%;
-  }
+.navbar.navbar-scroll .navbar-toggle .icon-bar {
+  background-color: #000;
 }
 
-/* Mobile View */
-@media only screen and (max-width: 767px) {
-  .food-section {
-    flex-basis: 100% !important;
-  }
+.container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 
-  .section-title {
-    position: static;
-    margin-bottom: 10px;
-  }
+h1 {
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+.section {
+  height: 1000px;
+  background-color: #f4f4f4;
 }

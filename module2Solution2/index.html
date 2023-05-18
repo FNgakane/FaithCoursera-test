@@ -1,38 +1,45 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Faith Kitchen Page</title>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <link rel="stylesheet" type="text/css" href="css/mycss.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/mycss.css">
+  <title>Food, LLC</title>
 </head>
 <body>
-  <header>
-    <h1>Faith Kitchen Menu</h1>
-  </header>
+  <nav class="navbar navbar-default navbar-scroll">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Food, LLC</a>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu-dropdown" aria-expanded="false">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="menu-dropdown">
+        <ul class="nav navbar-nav">
+          <li><a href="#">Chicken</a></li>
+          <li><a href="#">Beef</a></li>
+          <li><a href="#">Sushi</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-  <main>
-    <div class="food-section">
-      <div class="section-title"><span class="highlight1">Chicken</span></div>
-      <h2>Section 1</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+  <div class="container">
+    <h1 class="text-center">Our Menu</h1>
+    <div class="row">
+      <div class="col-xs-12">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cursus vitae congue mauris rhoncus aenean vel. Facilisis mauris sit amet massa. Vitae proin sagittis nisl rhoncus mattis rhoncus. Mauris in aliquam sem fringilla. Vel facilisis volutpat est velit. Tellus in metus vulputate eu scelerisque felis imperdiet. Molestie a iaculis at erat pellentesque adipiscing. Mauris vitae ultricies leo integer malesuada nunc vel. Condimentum lacinia quis vel eros donec. Eget velit aliquet sagittis id consectetur purus ut faucibus. Egestas purus viverra accumsan in. Euismod quis viverra nibh cras. Scelerisque fermentum dui faucibus in ornare quam. In eu mi bibendum neque egestas congue quisque egestas. Tincidunt arcu non sodales neque. Dictum non consectetur a erat nam at lectus urna duis. Sit amet nisl suscipit adipiscing bibendum. Quam adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus. Nisl rhoncus mattis rhoncus urna neque viverra.
+
+Ut tortor pretium viverra suspendisse potenti nullam ac tortor vitae. Senectus et netus et malesuada fames ac turpis. Interdum varius sit amet mattis vulputate enim nulla aliquet. Urna nec tincidunt praesent semper. Sed felis eget velit aliquet sagittis id consectetur. Duis ut diam quam nulla. Arcu dictum varius duis at consectetur lorem donec. A erat nam at lectus. Bibendum ut tristique et egestas. In fermentum et sollicitudin ac orci phasellus egestas tellus rutrum. Neque convallis a cras semper auctor neque vitae tempus quam. Non pulvinar neque laoreet suspendisse interdum consectetur libero id faucibus.</p>
+      </div>
     </div>
-  
-    <div class="food-section">
-      <div class="section-title"> <span class="highlight2">Beef</span></div>
-      <h2>Section 2</h2>
-      <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-    </div>
-  
-    <div class="food-section">
-      <div class="section-title"><span class="highlight3">Sushi</span></div>
-      <h2>Section 3</h2>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-    </div>
-  </main>
+  </div>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
-
-
-
-
