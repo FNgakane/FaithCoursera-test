@@ -84,7 +84,7 @@ showLoading("#main-content");
 $ajaxUtils.sendGetRequest(
   allCategoriesUrl,
    function (categories) {
-      buildAndShowHomeHTML(categories);
+      buildAndShowHomeHTML(categories[randomArrayIndex].short_name);
     }, // ***** <---- TODO: STEP 1: Substitute [...] ******
   true); // Explicitly setting the flag to get JSON from server processed into an object literal
 });
@@ -93,16 +93,16 @@ $ajaxUtils.sendGetRequest(
 
 // Builds HTML for the home page based on categories array
 // returned from the server.
-function buildAndShowHomeHTML (categories) {
-
+function buildAndShowHomeHTML (shortName) {
+  var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml, "categoryShortName", shortName);
   // Load home snippet page
   $ajaxUtils.sendGetRequest(
     homeHtmlUrl,
     function (homeHtml) {
 
-      var chosenCategory = chooseRandomCategory(categories);
+       var chosenCategory = chooseRandomCategory(categories);
       var chosenCategoryShortName = chosenCategory.short_name;
-      var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml, "randomCategoryShortName", chosenCategoryShortName);
+      var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml, "categoryShortName", chosenCategoryShortName);
       insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
 
     },
