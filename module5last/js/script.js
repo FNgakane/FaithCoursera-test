@@ -73,27 +73,26 @@ $(function () {
     $ajaxUtils.sendGetRequest(allCategoriesUrl, buildAndShowCategoriesHTML);
   };
 
-dc.loadMenuItems = function (categoryShort) {
-  showLoading("#main-content");
-  $ajaxUtils.sendGetRequest(
-    menuItemsUrl + categoryShort + ".json",
-    buildAndShowMenuItemsHTML);
-};
-
-dc.loadMenuItems = loadMenuItems;
+  dc.loadMenuItems = function (categoryShort) {
+    showLoading("#main-content");
+    $ajaxUtils.sendGetRequest(
+      menuItemsUrl + categoryShort + ".json",
+      buildAndShowMenuItemsHTML
+    );
+  };
 
   global.$dc = dc;
 })(window);
 
-  function buildAndShowCategoriesHTML(categories) {
-    $ajaxUtils.sendGetRequest(categoriesTitleHtml, function (categoriesTitleHtml) {
-      $ajaxUtils.sendGetRequest(categoryHtml, function (categoryHtml) {
-        switchMenuToActive();
-        var categoriesViewHtml = buildCategoriesViewHtml(categories, categoriesTitleHtml, categoryHtml);
-        insertHtml("#main-content", categoriesViewHtml);
-      }, false);
+function buildAndShowCategoriesHTML(categories) {
+  $ajaxUtils.sendGetRequest(categoriesTitleHtml, function (categoriesTitleHtml) {
+    $ajaxUtils.sendGetRequest(categoryHtml, function (categoryHtml) {
+      switchMenuToActive();
+      var categoriesViewHtml = buildCategoriesViewHtml(categories, categoriesTitleHtml, categoryHtml);
+      insertHtml("#main-content", categoriesViewHtml);
     }, false);
-  }
+  }, false);
+}
 
 function buildCategoriesViewHtml(categories, categoriesTitleHtml, categoryHtml) {
   var finalHtml = categoriesTitleHtml;
@@ -113,71 +112,71 @@ function buildCategoriesViewHtml(categories, categoriesTitleHtml, categoryHtml) 
   // Add onclick event to Specials tile
   var specialsTile = document.querySelector("#specials-tile");
   specialsTile.setAttribute("onclick", "$dc.loadMenuItems('SP')");
-  
+
   return finalHtml;
 }
 
 
-  function buildAndShowMenuItemsHTML(categoryMenuItems) {
-    $ajaxUtils.sendGetRequest(menuItemsTitleHtml, function (menuItemsTitleHtml) {
-      $ajaxUtils.sendGetRequest(menuItemHtml, function (menuItemHtml) {
-        switchMenuToActive();
-        var menuItemsViewHtml = buildMenuItemsViewHtml(categoryMenuItems, menuItemsTitleHtml, menuItemHtml);
-        insertHtml("#main-content", menuItemsViewHtml);
-      }, false);
+function buildAndShowMenuItemsHTML(categoryMenuItems) {
+  $ajaxUtils.sendGetRequest(menuItemsTitleHtml, function (menuItemsTitleHtml) {
+    $ajaxUtils.sendGetRequest(menuItemHtml, function (menuItemHtml) {
+      switchMenuToActive();
+      var menuItemsViewHtml = buildMenuItemsViewHtml(categoryMenuItems, menuItemsTitleHtml, menuItemHtml);
+      insertHtml("#main-content", menuItemsViewHtml);
     }, false);
-  }
+  }, false);
+}
 
-  function buildMenuItemsViewHtml(categoryMenuItems, menuItemsTitleHtml, menuItemHtml) {
-    menuItemsTitleHtml = insertProperty(menuItemsTitleHtml, "name", categoryMenuItems.category.name);
-    menuItemsTitleHtml = insertProperty(menuItemsTitleHtml, "special_instructions", categoryMenuItems.category.special_instructions);
+function buildMenuItemsViewHtml(categoryMenuItems, menuItemsTitleHtml, menuItemHtml) {
+  menuItemsTitleHtml = insertProperty(menuItemsTitleHtml, "name", categoryMenuItems.category.name);
+  menuItemsTitleHtml = insertProperty(menuItemsTitleHtml, "special_instructions", categoryMenuItems.category.special_instructions);
 
-    var finalHtml = menuItemsTitleHtml;
-    finalHtml += "<section class='row'>";
+  var finalHtml = menuItemsTitleHtml;
+  finalHtml += "<section class='row'>";
 
-    var menuItems = categoryMenuItems.menu_items;
-    var catShortName = categoryMenuItems.category.short_name;
-    for (var i = 0; i < menuItems.length; i++) {
-      var html = menuItemHtml;
-      html = insertProperty(html, "short_name", menuItems[i].short_name);
-      html = insertProperty(html, "catShortName", catShortName);
-      html = insertItemPrice(html, "price_small", menuItems[i].price_small);
-      html = insertItemPortionName(html, "small_portion_name", menuItems[i].small_portion_name);
-      html = insertItemPrice(html, "price_large", menuItems[i].price_large);
-      html = insertItemPortionName(html, "large_portion_name", menuItems[i].large_portion_name);
-      html = insertProperty(html, "name", menuItems[i].name);
-      html = insertProperty(html, "description", menuItems[i].description);
+  var menuItems = categoryMenuItems.menu_items;
+  var catShortName = categoryMenuItems.category.short_name;
+  for (var i = 0; i < menuItems.length; i++) {
+    var html = menuItemHtml;
+    html = insertProperty(html, "short_name", menuItems[i].short_name);
+    html = insertProperty(html, "catShortName", catShortName);
+    html = insertItemPrice(html, "price_small", menuItems[i].price_small);
+    html = insertItemPortionName(html, "small_portion_name", menuItems[i].small_portion_name);
+    html = insertItemPrice(html, "price_large", menuItems[i].price_large);
+    html = insertItemPortionName(html, "large_portion_name", menuItems[i].large_portion_name);
+    html = insertProperty(html, "name", menuItems[i].name);
+    html = insertProperty(html, "description", menuItems[i].description);
 
-      if (i % 2 !== 0) {
-        html += "<div class='clearfix visible-lg-block visible-md-block'></div>";
-      }
-
-      finalHtml += html;
+    if (i % 2 !== 0) {
+      html += "<div class='clearfix visible-lg-block visible-md-block'></div>";
     }
 
-    finalHtml += "</section>";
-    return finalHtml;
+    finalHtml += html;
   }
 
-  function insertItemPrice(html, pricePropName, priceValue) {
-    if (!priceValue) {
-      return insertProperty(html, pricePropName, "");
-    }
+  finalHtml += "</section>";
+  return finalHtml;
+}
 
-    priceValue = "$" + priceValue.toFixed(2);
-    html = insertProperty(html, pricePropName, priceValue);
-    return html;
+function insertItemPrice(html, pricePropName, priceValue) {
+  if (!priceValue) {
+    return insertProperty(html, pricePropName, "");
   }
 
-  function insertItemPortionName(html, portionPropName, portionValue) {
-    if (!portionValue) {
-      return insertProperty(html, portionPropName, "");
-    }
+  priceValue = "$" + priceValue.toFixed(2);
+  html = insertProperty(html, pricePropName, priceValue);
+  return html;
+}
 
-    portionValue = "(" + portionValue + ")";
-    html = insertProperty(html, portionPropName, portionValue);
-    return html;
+function insertItemPortionName(html, portionPropName, portionValue) {
+  if (!portionValue) {
+    return insertProperty(html, portionPropName, "");
   }
 
-  global.$dc = dc;
+  portionValue = "(" + portionValue + ")";
+  html = insertProperty(html, portionPropName, portionValue);
+  return html;
+}
+
+global.$dc = dc;
 })(window);
