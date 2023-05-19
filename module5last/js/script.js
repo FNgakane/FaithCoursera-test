@@ -92,7 +92,7 @@ $ajaxUtils.sendGetRequest(
 );
 
 function buildAndShowHomeHTML(categories) {
-  var homeHtmlUrl = "snippets/home-snippet.html"; 
+  var homeHtmlUrl = "snippets/home-snippet.html";
 
   $ajaxUtils.sendGetRequest(
     homeHtmlUrl,
@@ -105,6 +105,7 @@ function buildAndShowHomeHTML(categories) {
     false
   );
 }
+
 
 
 // Given array of category objects, returns a random category object.
