@@ -14,12 +14,10 @@ $(function () { // Same as document.addEventListener("DOMContentLoaded"...
 var dc = {};
 
 var homeHtmlUrl = "snippets/home-snippet.html";
-var allCategoriesUrl =
-  "https://coursera-jhu-default-rtdb.firebaseio.com/categories.json";
+var allCategoriesUrl =  "https://coursera-jhu-default-rtdb.firebaseio.com/categories.json";
 var categoriesTitleHtml = "snippets/categories-title-snippet.html";
 var categoryHtml = "snippets/category-snippet.html";
-var menuItemsUrl =
-  "https://coursera-jhu-default-rtdb.firebaseio.com/menu_items/";
+var menuItemsUrl =  "https://coursera-jhu-default-rtdb.firebaseio.com/menu_items/";
 var menuItemsTitleHtml = "snippets/menu-items-title.html";
 var menuItemHtml = "snippets/menu-item.html";
 
@@ -80,53 +78,33 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 // *** start ***
 // On first load, show home view
-showLoading("#main-content");
-$ajaxUtils.sendGetRequest(
-  allCategoriesUrl,
-  [...], // ***** <---- TODO: STEP 1: Substitute [...] ******
-  true); // Explicitly setting the flag to get JSON from server processed into an object literal
-});
-// *** finish **
 
+  showLoading("#main-content");
+  $ajaxUtils.sendGetRequest(
+    allCategoriesUrl,
+    function (categories) {
+      buildAndShowHomeHTML(categories);
+    },
+    true
+  );
+  // *** finish ***
+});
 
 // Builds HTML for the home page based on categories array
 // returned from the server.
-function buildAndShowHomeHTML (categories) {
-
+function buildAndShowHomeHTML(categories) {
   // Load home snippet page
   $ajaxUtils.sendGetRequest(
     homeHtmlUrl,
     function (homeHtml) {
-
-      // TODO: STEP 2: Here, call chooseRandomCategory, passing it retrieved 'categories'
-      // Pay attention to what type of data that function returns vs what the chosenCategoryShortName
-      // variable's name implies it expects.
-      // var chosenCategoryShortName = ....
-
-
-      // TODO: STEP 3: Substitute {{randomCategoryShortName}} in the home html snippet with the
-      // chosen category from STEP 2. Use existing insertProperty function for that purpose.
-      // Look through this code for an example of how to do use the insertProperty function.
-      // WARNING! You are inserting something that will have to result in a valid Javascript
-      // syntax because the substitution of {{randomCategoryShortName}} becomes an argument
-      // being passed into the $dc.loadMenuItems function. Think about what that argument needs
-      // to look like. For example, a valid call would look something like this:
-      // $dc.loadMenuItems('L')
-      // Hint: you need to surround the chosen category short name with something before inserting
-      // it into the home html snippet.
-      //
-      // var homeHtmlToInsertIntoMainPage = ....
-
-
-      // TODO: STEP 4: Insert the produced HTML in STEP 3 into the main page
-      // Use the existing insertHtml function for that purpose. Look through this code for an example
-      // of how to do that.
-      // ....
-
+      var chosenCategory = chooseRandomCategory(categories);
+      var chosenCategoryShortName = chosenCategory.short_name;
+      var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml, "randomCategoryShortName", chosenCategoryShortName);
+      insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
     },
-    false); // False here because we are getting just regular HTML from the server, so no need to process JSON.
+    false
+  );
 }
-
 
 // Given array of category objects, returns a random category object.
 function chooseRandomCategory (categories) {
@@ -139,6 +117,7 @@ function chooseRandomCategory (categories) {
 
 
 // Load the menu categories view
+ var dc = {};
 dc.loadMenuCategories = function () {
   showLoading("#main-content");
   $ajaxUtils.sendGetRequest(
