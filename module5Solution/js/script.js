@@ -98,14 +98,12 @@ function buildAndShowHomeHTML(categories) {
     function (homeHtml) {
       var chosenCategory = chooseRandomCategory(categories);
       var chosenCategoryShortName = chosenCategory.short_name;
-      var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml, "randomCategoryShortName", "'" + chosenCategoryShortName + "'");
+      var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml, "randomCategoryShortName", chosenCategoryShortName);
       insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
     },
     false
   );
 }
-
-
 
 // Given array of category objects, returns a random category object.
 function chooseRandomCategory (categories) {
