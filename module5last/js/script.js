@@ -73,7 +73,8 @@ $(function () {
   function buildAndShowHomeHTML(categories) {
     $ $ajaxUtils.sendGetRequest(homeHtmlUrl, function (homeHtml) {
     var randomCategoryIndex = Math.floor(Math.random() * categories.length);
-    var randomCategoryShortName = categories[randomCategoryIndex].short_name;
+    var randomCategoryShortName = categories[randomIndex].short_name;
+
 
     // Adjust the value of randomCategoryShortName in the home HTML string
     var adjustedHomeHtml = homeHtml.replace(/{{randomCategoryShortName}}/g, randomCategoryShortName);
