@@ -80,7 +80,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 // *** start ***
 // On first load, show home view
-
 showLoading("#main-content");
 
 $ajaxUtils.sendGetRequest(
@@ -105,7 +104,6 @@ function buildAndShowHomeHTML(categories) {
     false
   );
 }
-
 
 
 // Given array of category objects, returns a random category object.
