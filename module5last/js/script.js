@@ -73,10 +73,13 @@ $(function () {
     $ajaxUtils.sendGetRequest(allCategoriesUrl, buildAndShowCategoriesHTML);
   };
 
-  dc.loadMenuItems = function (categoryShort) {
-    showLoading("#main-content");
-    $ajaxUtils.sendGetRequest(menuItemsUrl + categoryShort + ".json", buildAndShowMenuItemsHTML);
-  };
+dc.loadMenuItems = function (categoryShort) {
+  showLoading("#main-content");
+  $ajaxUtils.sendGetRequest(
+    menuItemsUrl + categoryShort + ".json",
+    buildAndShowMenuItemsHTML);
+};
+
 
   function buildAndShowCategoriesHTML(categories) {
     $ajaxUtils.sendGetRequest(categoriesTitleHtml, function (categoriesTitleHtml) {
@@ -88,22 +91,28 @@ $(function () {
     }, false);
   }
 
-  function buildCategoriesViewHtml(categories, categoriesTitleHtml, categoryHtml) {
-    var finalHtml = categoriesTitleHtml;
-    finalHtml += "<section class='row'>";
+function buildCategoriesViewHtml(categories, categoriesTitleHtml, categoryHtml) {
+  var finalHtml = categoriesTitleHtml;
+  finalHtml += "<section class='row'>";
 
-    for (var i = 0; i < categories.length; i++) {
-      var html = categoryHtml;
-      var name = "" + categories[i].name;
-      var short_name = categories[i].short_name;
-      html = insertProperty(html, "name", name);
-      html = insertProperty(html, "short_name", short_name);
-      finalHtml += html;
-    }
-
-    finalHtml += "</section>";
-    return finalHtml;
+  for (var i = 0; i < categories.length; i++) {
+    var html = categoryHtml;
+    var name = "" + categories[i].name;
+    var short_name = categories[i].short_name;
+    html = insertProperty(html, "name", name);
+    html = insertProperty(html, "short_name", short_name);
+    finalHtml += html;
   }
+
+  finalHtml += "</section>";
+
+  // Add onclick event to Specials tile
+  var specialsTile = document.querySelector("#specials-tile");
+  specialsTile.setAttribute("onclick", "$dc.loadMenuItems('SP')");
+  
+  return finalHtml;
+}
+
 
   function buildAndShowMenuItemsHTML(categoryMenuItems) {
     $ajaxUtils.sendGetRequest(menuItemsTitleHtml, function (menuItemsTitleHtml) {
