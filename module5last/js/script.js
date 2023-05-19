@@ -80,6 +80,10 @@ dc.loadMenuItems = function (categoryShort) {
     buildAndShowMenuItemsHTML);
 };
 
+dc.loadMenuItems = loadMenuItems;
+
+  global.$dc = dc;
+})(window);
 
   function buildAndShowCategoriesHTML(categories) {
     $ajaxUtils.sendGetRequest(categoriesTitleHtml, function (categoriesTitleHtml) {
