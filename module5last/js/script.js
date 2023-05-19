@@ -71,17 +71,15 @@ $(function () {
   // Builds HTML for the home page based on categories array
   // returned from the server.
   function buildAndShowHomeHTML(categories) {
-    $ajaxUtils.sendGetRequest(
-      homeHtmlUrl,
-      function (homeHtml) {
-        var randomCategoryIndex = Math.floor(Math.random() * categories.length);
-        var randomCategoryShortName = categories[randomCategoryIndex].short_name;
-        var homeHtmlToInsertIntoMainPage = insertProperty(
-          homeHtml,
-          "randomCategoryShortName",
-          randomCategoryShortName
-        );
-        insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
+    $ $ajaxUtils.sendGetRequest(homeHtmlUrl, function (homeHtml) {
+    var randomCategoryIndex = Math.floor(Math.random() * categories.length);
+    var randomCategoryShortName = categories[randomCategoryIndex].short_name;
+
+    // Adjust the value of randomCategoryShortName in the home HTML string
+    var adjustedHomeHtml = homeHtml.replace(/{{randomCategoryShortName}}/g, randomCategoryShortName);
+
+    // Insert the adjusted home HTML into the main page
+    insertHtml("#main-content", adjustedHomeHtml);
       },
       false
     );
