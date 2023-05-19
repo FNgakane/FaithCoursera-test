@@ -111,7 +111,8 @@ function buildAndShowHomeHTML (categories) {
       insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
   
     },
-    false); // False here because we are getting just regular HTML from the server, so no need to process JSON.
+    false
+    ); // False here because we are getting just regular HTML from the server, so no need to process JSON.
 }
 
 
@@ -123,7 +124,7 @@ function chooseRandomCategory (categories) {
   // return category object with that randomArrayIndex
   return categories[randomArrayIndex];
 }
-
+})(window);
 
 // Load the menu categories view
 dc.loadMenuCategories = function () {
